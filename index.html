@@ -3,70 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal ODS - Panel de Control</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Librería para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Campaña Paneles Solares en Cuba</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Librería para gráficos interactivos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Barra Superior -->
-    <header class="top-bar">
-        <div class="header-title">
-            <span class="icon">🌍</span>
-            <h1>Portal de Desarrollo Sostenible</h1>
-        </div>
-        <div class="header-lang">Español ▼</div>
+    <header class="hero">
+        <h1>El Precio del Sol en Cuba</h1>
+        <p>Análisis técnico y económico de la energía solar vs. el salario real</p>
     </header>
 
-    <!-- Contenido Principal -->
-    <main>
-        <!-- Controles de Selección -->
-        <section class="controls">
-            <h2>Selecciona un País para ver sus indicadores ODS</h2>
-            <select id="country-selector">
-                <option value="" disabled selected>-- Elige un país --</option>
-                <!-- Las opciones se cargan con JS -->
-            </select>
+    <main class="contenedor">
+        <!-- Sección 1: Comparación Económica -->
+        <section class="comparacion">
+            <div class="tarjeta salario">
+                <h2>Salario Medio Mensual</h2>
+                <div class="numero">7,400 <span>CUP</span></div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="tarjeta panel">
+                <h2>Kit Solar Básico (800W)</h2>
+                <div class="numero">75,200 <span>CUP</span></div>
+            </div>
         </section>
 
-        <!-- Contenedor de Datos (Oculto hasta seleccionar país) -->
-        <section id="dashboard" class="dashboard hidden">
-            
-            <!-- Tarjetas de Resumen (Comunicación de datos numéricos) -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Población Total</h3>
-                    <p id="stat-population">-</p>
+        <!-- Sección 2: Ficha Técnica (Nuevos Datos) -->
+        <section class="ficha-tecnica">
+            <h2>⚡ Especificaciones Técnicas del Equipo</h2>
+            <div class="grid-datos">
+                <div class="dato-item">
+                    <span class="etiqueta">Potencia del Panel</span>
+                    <span class="valor">540 W</span>
+                    <small>Mono PERC (Alta eficiencia)</small>
                 </div>
-                <div class="stat-card">
-                    <h3>Esperanza de Vida</h3>
-                    <p id="stat-life">-</p>
+                <div class="dato-item">
+                    <span class="etiqueta">Generación Diaria</span>
+                    <span class="valor">~3 kWh</span>
+                    <small>Depende de la radiación solar</small>
                 </div>
-                <div class="stat-card">
-                    <h3>Índice de Pobreza</h3>
-                    <p id="stat-poverty">-</p>
+                <div class="dato-item">
+                    <span class="etiqueta">Precio en USD</span>
+                    <span class="valor">$230</span>
+                    <small>Mercado informal</small>
+                </div>
+                <div class="dato-item">
+                    <span class="etiqueta">Batería Incluida</span>
+                    <span class="valor">1,200 W</span>
+                    <small>Para respaldo nocturno</small>
                 </div>
             </div>
+        </section>
 
-            <!-- Gráfico Interactivo -->
+        <!-- Sección 3: Gráfico Interactivo -->
+        <section class="grafico-seccion">
+            <h2>¿Qué puedes encender con este panel?</h2>
+            <p>Comparación de consumo (Vatios) vs. Capacidad del Panel</p>
             <div class="chart-container">
-                <canvas id="odsChart"></canvas>
+                <canvas id="miGrafico"></canvas>
             </div>
+        </section>
 
+        <!-- Sección 4: Conclusión (Impacto) -->
+        <section class="impacto">
+            <h3>El Impacto Real</h3>
+            <p>Se necesitan <strong>más de 10 meses de salario completo</strong> para poder adquirir un kit solar básico. Aunque técnicamente es capaz de mantener un refrigerador encendido, el costo de entrada sigue siendo prohibitivo para la mayoría.</p>
+            <div class="barra-progreso">
+                <div class="barra-salario">1 mes</div>
+                <div class="barra-total">10 meses de trabajo...</div>
+            </div>
         </section>
     </main>
 
-    <!-- Barra de Navegación Inferior (Igual a tu diseño) -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">🌐</span><span class="nav-text">Países</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">📈</span><span class="nav-text">Reportes</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-text">Ajustes</span></a>
-    </nav>
-
-    <script src="app.js"></script>
+    <!-- Script para activar el gráfico interactivo -->
+    <script>
+        const ctx = document.getElementById('miGrafico').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Panel Solar (Capacidad)', 'Refrigerador', 'Ventilador', 'Televisor'],
+                datasets: [{
+                    label: 'Vatios (W)',
+                    data: [540, 150, 45, 80], // Datos basados en búsquedas
+                    backgroundColor: [
+                        '#f4a261', // Panel (Naranja)
+                        '#e76f51', // Nevera (Rojo)
+                        '#e9c46a', // Ventilador (Amarillo)
+                        '#2a9d8f'  // TV (Verde)
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Comparativa de Potencia (Watts)',
+                        color: '#ffffff'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#aaaaaa' },
+                        grid: { color: '#333333' }
+                    },
+                    x: {
+                        ticks: { color: '#aaaaaa' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
 <!DOCTYPE html>
@@ -74,69 +128,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal ODS - Panel de Control</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Librería para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Campaña Paneles Solares en Cuba</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Librería para gráficos interactivos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Barra Superior -->
-    <header class="top-bar">
-        <div class="header-title">
-            <span class="icon">🌍</span>
-            <h1>Portal de Desarrollo Sostenible</h1>
-        </div>
-        <div class="header-lang">Español ▼</div>
+    <header class="hero">
+        <h1>El Precio del Sol en Cuba</h1>
+        <p>Análisis técnico y económico de la energía solar vs. el salario real</p>
     </header>
 
-    <!-- Contenido Principal -->
-    <main>
-        <!-- Controles de Selección -->
-        <section class="controls">
-            <h2>Selecciona un País para ver sus indicadores ODS</h2>
-            <select id="country-selector">
-                <option value="" disabled selected>-- Elige un país --</option>
-                <!-- Las opciones se cargan con JS -->
-            </select>
+    <main class="contenedor">
+        <!-- Sección 1: Comparación Económica -->
+        <section class="comparacion">
+            <div class="tarjeta salario">
+                <h2>Salario Medio Mensual</h2>
+                <div class="numero">7,400 <span>CUP</span></div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="tarjeta panel">
+                <h2>Kit Solar Básico (800W)</h2>
+                <div class="numero">75,200 <span>CUP</span></div>
+            </div>
         </section>
 
-        <!-- Contenedor de Datos (Oculto hasta seleccionar país) -->
-        <section id="dashboard" class="dashboard hidden">
-            
-            <!-- Tarjetas de Resumen (Comunicación de datos numéricos) -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Población Total</h3>
-                    <p id="stat-population">-</p>
+        <!-- Sección 2: Ficha Técnica (Nuevos Datos) -->
+        <section class="ficha-tecnica">
+            <h2>⚡ Especificaciones Técnicas del Equipo</h2>
+            <div class="grid-datos">
+                <div class="dato-item">
+                    <span class="etiqueta">Potencia del Panel</span>
+                    <span class="valor">540 W</span>
+                    <small>Mono PERC (Alta eficiencia)</small>
                 </div>
-                <div class="stat-card">
-                    <h3>Esperanza de Vida</h3>
-                    <p id="stat-life">-</p>
+                <div class="dato-item">
+                    <span class="etiqueta">Generación Diaria</span>
+                    <span class="valor">~3 kWh</span>
+                    <small>Depende de la radiación solar</small>
                 </div>
-                <div class="stat-card">
-                    <h3>Índice de Pobreza</h3>
-                    <p id="stat-poverty">-</p>
+                <div class="dato-item">
+                    <span class="etiqueta">Precio en USD</span>
+                    <span class="valor">$230</span>
+                    <small>Mercado informal</small>
+                </div>
+                <div class="dato-item">
+                    <span class="etiqueta">Batería Incluida</span>
+                    <span class="valor">1,200 W</span>
+                    <small>Para respaldo nocturno</small>
                 </div>
             </div>
+        </section>
 
-            <!-- Gráfico Interactivo -->
+        <!-- Sección 3: Gráfico Interactivo -->
+        <section class="grafico-seccion">
+            <h2>¿Qué puedes encender con este panel?</h2>
+            <p>Comparación de consumo (Vatios) vs. Capacidad del Panel</p>
             <div class="chart-container">
-                <canvas id="odsChart"></canvas>
+                <canvas id="miGrafico"></canvas>
             </div>
+        </section>
 
+        <!-- Sección 4: Conclusión (Impacto) -->
+        <section class="impacto">
+            <h3>El Impacto Real</h3>
+            <p>Se necesitan <strong>más de 10 meses de salario completo</strong> para poder adquirir un kit solar básico. Aunque técnicamente es capaz de mantener un refrigerador encendido, el costo de entrada sigue siendo prohibitivo para la mayoría.</p>
+            <div class="barra-progreso">
+                <div class="barra-salario">1 mes</div>
+                <div class="barra-total">10 meses de trabajo...</div>
+            </div>
         </section>
     </main>
 
-    <!-- Barra de Navegación Inferior (Igual a tu diseño) -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">🌐</span><span class="nav-text">Países</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">📈</span><span class="nav-text">Reportes</span></a>
-        <a href="#" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-text">Ajustes</span></a>
-    </nav>
-
-    <script src="app.js"></script>
+    <!-- Script para activar el gráfico interactivo -->
+    <script>
+        const ctx8 = document.getElementById('miGrafico').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Panel Solar (Capacidad)', 'Refrigerador', 'Ventilador', 'Televisor'],
+                datasets: [{
+                    label: 'Vatios (W)',
+                    data: [540, 150, 45, 80], // Datos basados en búsquedas
+                    backgroundColor: [
+                        '#f4a261', // Panel (Naranja)
+                        '#e76f51', // Nevera (Rojo)
+                        '#e9c46a', // Ventilador (Amarillo)
+                        '#2a9d8f'  // TV (Verde)
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Comparativa de Potencia (Watts)',
+                        color: '#ffffff'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#aaaaaa' },
+                        grid: { color: '#333333' }
+                    },
+                    x: {
+                        ticks: { color: '#aaaaaa' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

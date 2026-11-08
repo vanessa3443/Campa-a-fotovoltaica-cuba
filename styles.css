@@ -1,129 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* =========================================
+   RESET Y ESTILOS GLOBALES
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: #000000;
+    background-color: #0a0a0a;
     color: #ffffff;
-    padding-bottom: 70px; 
+    min-height: 100vh;
 }
 
-/* --- Barra Superior --- */
-.top-bar {
+/* =========================================
+   HEADER (PORTADA)
+   ========================================= */
+.hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0a 100%);
+    border-bottom: 2px solid #f4a261;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: #f4a261; /* Color solar */
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    color: #cccccc;
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* =========================================
+   SECCIÓN 1: COMPARACIÓN (TARJETAS)
+   ========================================= */
+.comparacion {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    background-color: #111;
-    border-bottom: 2px solid #009edb;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
-.header-title { display: flex; align-items: center; gap: 10px; }
-.header-title h1 { font-size: 16px; font-weight: 400; }
-.header-lang { font-size: 14px; cursor: pointer; }
-
-/* --- Controles y Selector --- */
-.controls {
-    padding: 20px 15px;
-    border-bottom: 1px solid #333;
+.tarjeta {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.controls h2 {
-    font-size: 16px;
-    margin-bottom: 15px;
+.tarjeta h2 {
+    font-size: 1.1rem;
     font-weight: 400;
+    color: #aaaaaa;
+    margin-bottom: 0.5rem;
 }
 
-select {
-    width: 100%;
-    padding: 12px;
-    background-color: #1a1a1a;
-    color: #fff;
-    border: 1px solid #009edb;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    cursor: pointer;
+.numero {
+    font-size: 2.2rem;
+    font-weight: 700;
 }
 
-/* --- Dashboard --- */
-.dashboard {
-    padding: 20px 15px;
-    transition: opacity 0.3s ease;
+.salario .numero {
+    color: #e74c3c; /* Rojo */
 }
 
-.hidden {
-    display: none;
+.panel .numero {
+    color: #f4a261; /* Naranja */
 }
 
-/* Tarjetas de Estadísticas */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin-bottom: 25px;
+.vs {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #555;
 }
 
-.stat-card {
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #009edb;
+/* =========================================
+   SECCIÓN 2: FICHA TÉCNICA
+   ========================================= */
+.ficha-tecnica {
+    background: #151525;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    border: 1px solid #333;
+}
+
+.ficha-tecnica h2 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.stat-card h3 {
-    font-size: 14px;
-    color: #aaa;
-    margin-bottom: 10px;
-    font-weight: 400;
+.grid-datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
 }
 
-.stat-card p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-}
-
-/* Gráfico */
-.chart-container {
-    background-color: #1a1a1a;
-    padding: 15px;
-    border-radius: 8px;
-    height: 300px;
-    position: relative;
-}
-
-/* --- Barra de Navegación Inferior --- */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #000;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    border-top: 1px solid #333;
-}
-
-.nav-item {
+.dato-item {
+    background: #1e1e1e;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border-left: 4px solid #f4a261;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #aaa;
-    font-size: 10px;
-    width: 25%;
 }
 
-.nav-item.active { color: #009edb; }
-.nav-icon { font-size: 20px; margin-bottom: 5px; }
+.etiqueta {
+    font-size: 0.85rem;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-/* Para pantallas más grandes (Tablet/PC) */
-@media (min-width: 600px) {
-    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+.valor {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0.2rem 0;
+}
+
+.dato-item small {
+    font-size: 0.8rem;
+    color: #666666;
+}
+
+/* =========================================
+   SECCIÓN 3: GRÁFICO
+   ========================================= */
+.grafico-seccion {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+}
+
+.grafico-seccion h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.grafico-seccion p {
+    color: #aaaaaa;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* =========================================
+   SECCIÓN 4: IMPACTO Y CONCLUSIÓN
+   ========================================= */
+.impacto {
+    background: #1a1a2e;
+    padding: 2rem;
+    border-radius: 15px;
+    border-left: 5px solid #f4a261;
+}
+
+.impacto h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.impacto p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #cccccc;
+}
+
+.barra-progreso {
+    display: flex;
+    margin-top: 1.5rem;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: bold;
+    align-items: center;
+}
+
+.barra-salario {
+    background-color: #e74c3c;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.barra-total {
+    background-color: #f4a261;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (MÓVILES)
+   ========================================= */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .comparacion {
+        flex-direction: column;
+    }
+    
+    .vs {
+        margin: 0.5rem 0;
+    }
+    
+    .barra-salario { 
+        display: none; /* Se oculta en móviles para que no se vea apretado */
+    }
+    
+    .barra-total { 
+        width: 100%; 
+    }
 }
